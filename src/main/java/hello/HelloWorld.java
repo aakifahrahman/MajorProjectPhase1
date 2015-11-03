@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import opennlp.tools.cmdline.postag.POSModelLoader;
+import opennlp.tools.postag.POSModel;
+import opennlp.tools.postag.POSTaggerME;
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
 import opennlp.tools.tokenize.Tokenizer;
@@ -24,15 +27,15 @@ public class HelloWorld {
 	public static void main(String[] args) {
         try {
         	
-        	dictionary = new HashMap<String, Double>();
+        	//dictionary = new HashMap<String, Double>();
     	
-    		SentiCode("senti_word_net.txt");
+    		//SentiCode("senti_word_net.txt");
     		
-    		System.out.println("good#a "+ extract("good", "a"));
-    		System.out.println("bad#a "+ extract("bad", "a"));
-    		System.out.println("blue#a "+ extract("blue", "a"));
-    		System.out.println("blue#n "+ extract("blue", "n"));	
-			//SentenceDetect();
+    		//System.out.println("good#a "+ extract("good", "a"));
+    		//System.out.println("bad#a "+ extract("bad", "a"));
+    		//System.out.println("blue#a "+ extract("blue", "a"));
+    		//System.out.println("blue#n "+ extract("blue", "n"));	
+			SentenceDetect();
 		} catch (InvalidFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,20 +70,39 @@ public class HelloWorld {
 		
 		//Splitting each sentence into tokens
 		
-		while(i <noOfSentences){
-		
-			InputStream is2 = new FileInputStream("en-token.bin");
-			 
-			TokenizerModel model2 = new TokenizerModel(is2);
+		InputStream is2 = new FileInputStream("en-token.bin");
 		 
-			Tokenizer tokenizer = new TokenizerME(model2);
+		TokenizerModel model2 = new TokenizerModel(is2);
+	 
+		Tokenizer tokenizer = new TokenizerME(model2);
+		
+		POSModel model3 = new POSModelLoader().load(new File("en-pos-maxent.bin"));
+		
+		POSTaggerME tagger = new POSTaggerME(model3);
 
-			is2.close();
+		
+		while(i <noOfSentences){
 			
 			String tokens[] = tokenizer.tokenize(sentences[i]);
-		 
-			for (String a : tokens)
-				System.out.println(a);
+		 			
+			String[] tags = tagger.tag(tokens);
+		
+			for(int k = 0 ; k < tags.length; k++){
+			if (tags[k].charAt(0) == 'J')
+				tags[k] = "j" ;
+		    else if (tags[k].charAt(0) == 'V')
+		    	tags[k] = "v" ;
+		    else if (tags[k].charAt(0) == 'N')
+		    	tags[k] = "n" ;
+		    else if (tags[k].charAt(0) == 'R')
+		    	tags[k] = "r" ;
+		    else
+		    	tags[k] = " " ;
+			}
+			
+			for (int j = 0; j< tokens.length ; j++){
+				System.out.println(tokens[j] + " - " + tags[j]);
+			}
 		 			
 			i++;
 		}
