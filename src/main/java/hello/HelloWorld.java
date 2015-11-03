@@ -27,15 +27,12 @@ public class HelloWorld {
 	public static void main(String[] args) {
         try {
         	
-        	//dictionary = new HashMap<String, Double>();
+        	dictionary = new HashMap<String, Double>();
     	
-    		//SentiCode("senti_word_net.txt");
-    		
-    		//System.out.println("good#a "+ extract("good", "a"));
-    		//System.out.println("bad#a "+ extract("bad", "a"));
-    		//System.out.println("blue#a "+ extract("blue", "a"));
-    		//System.out.println("blue#n "+ extract("blue", "n"));	
+    		SentiCode("senti_word_net.txt");
+    		    		
 			SentenceDetect();
+			
 		} catch (InvalidFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +98,8 @@ public class HelloWorld {
 			}
 			
 			for (int j = 0; j< tokens.length ; j++){
-				System.out.println(tokens[j] + " - " + tags[j]);
+				if(!tags[j].isEmpty())
+				System.out.println(tokens[j] + " - " + tags[j]+ " - " + extract(tokens[j], tags[j]));
 			}
 		 			
 			i++;
@@ -208,7 +206,10 @@ public class HelloWorld {
 	}
 
 	public static double extract(String word, String pos) {
-		return dictionary.get(word + "#" + pos);
+		if(dictionary.get(word + "#" + pos) != null)
+			return dictionary.get(word + "#" + pos);
+		else
+			return 0.0;
 	}
 	
 }
