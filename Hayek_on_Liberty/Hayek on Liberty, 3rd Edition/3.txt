@@ -1,0 +1,9 @@
+I read this primarily wanting to get some handle on Hayek's work and I feel that it did help me, but that it was a book strangely behind its time. Its discussion of computation seemed unaware of the work going on as some of the criticisms of Dreyfus et. al. were in the process of being addressed, e.g., with Phil Agre's work on Pengi and Brooks' subsumption architecture -- although, admittedly some of this work was cotemporal with the writing of the book.
+
+Similarly, as soon as I read the game theory comments I found myself asking: "well how does 'tit for tat' fit in", but 'tit for tat' never seemed to be addressed even though the work was known long before the book was published.
+
+I found these oversights problematic, since they seemed to constitute one of the cores of the argument. They also hit one of my frustrations: the characterization that computation requires everything to be spelled out in exact detail. This is true for some systems some times, but does not completely cover the computational space.
+
+I would have also liked to have seen a more detailed exposition of what appeared to be an anti-statistics stance on Hayek's part-- another aspect that seemed core and which, in my mind, required more grounding.
+
+That said, it was a interesting book, the reviews just seem more favorable than justified, but Hayek is a polarizing figure.
